@@ -1,5 +1,6 @@
 	
-	/*admin.php page*/
+/*Admin Student Meeting Sacntion page*/
+
 	body{
 		background-size: cover;
 		font-family: tahoma;
@@ -24,15 +25,12 @@
 	.container {
 		margin: 0px auto;
 		height: 500px;
-		width: 600px;
+		width: 900px;
 	}
 	.banner{
 		margin: 0px auto;
 		height: 70px;
 		width: 400px;
-	}
-	.container ul{
-		margin-left: -15px;
 	}
 	.container ul li{
 		display: inline-block;
@@ -42,7 +40,7 @@
 	}
 	.diff{
 		display: inline-block;
-		margin-left: 115px;
+		margin-left: 470px;
 	}
 	.admin{
 		background-color: white;
@@ -76,18 +74,16 @@
 	}
 	.innerbanner{
 		position: relative;
-		margin: 0 auto;
 		height: 50px;
-		width: 600px;
+		width: 900px;
 	}
 	.contentbox{
 		position: relative;
-		height: 400px;
-		width: 530px;
+		margin: 0 auto;
+		height: 500px;
 		border-radius: 2px;
 		background-color: white;
 		margin-top: -25px;
-		margin-left: 30px;
 		padding: 5px 5px;
 	}
 	.innerbox{
@@ -132,13 +128,17 @@
 		-webkit-transform: rotate(180deg); /* Safari */
     	transform: rotate(180deg);
 	}	
+	.innerbanner ul{
+		padding: 0px 0px !important;
+	}
     ul li ul.dropdown{
-        width: 20px; /* Set width of the dropdown */
+        width: 60px; /* Set width of the dropdown */
+        height: 50px;
         background: white;
         display: none;
+        margin-left: -30px;
         position: absolute;
         z-index: 999;
-        left: 520px;
         box-shadow: -3px 3px 5px #888888;
         opacity: 1;
         -webkit-transition: all 3s ease-in-out;
@@ -159,6 +159,7 @@
     ul li ul.dropdown li{
         display: block;
     	text-align: right;
+    	margin-top: 3px;
     }
     .dropdown li a{
     	margin-left: -45px;
@@ -171,10 +172,6 @@
     	opacity: 1;
     	color: #ca3f4e;
 
-    }
-    .dropdown{
-    	padding-right: 5px;
-    	padding-bottom: 5px;
     }
     .overlay { /*copied*/
   		position: fixed;
@@ -284,7 +281,7 @@
 		padding-top: 10px;
 	}
 	.table1{
-		border: solid 2px gray;
+		border: solid 2px #67ff7c;
 		margin: 0 auto;
 		font-size: 14px;
 	}
@@ -305,11 +302,9 @@
 	}
 	.innerbox2{
 		position: relative;
-		width: 290px;
-		height: 200px;
+		width: 100%;
+		height: 330px;
 		overflow: auto;
-		border: 2px solid #44c83e;
-		padding-top: 5px;
 	}
 	.innerbox6{
 		position: relative;
@@ -325,10 +320,10 @@
 		position: relative;
 		left: 220px;
 		top: -395px;
-		width: 300px;
+		width: 450px;
 		height: 370px;
-		overflow: auto;
 		padding-top: 5px;
+		border: 2px solid #44c83e;
 	}
 	.innerbox8{
 		position: relative;
@@ -382,10 +377,9 @@
 	.innerbox3{
 		position: relative;
 		width: 250px;
-		height: 170px;
+		height: 180px;
 		left: 15px;
 		top: 20px;
-		overflow: auto;
 	}
 	.innerbox3 form{
 		width: 200px;
@@ -395,11 +389,12 @@
 		position: relative;
 		margin-top: 0px;
 		margin-left: 15px;
-		top: -120px;
-		width: 500px;
-		height: 200px;
+		width: 850px;
 		overflow: auto;
 		border: 2px solid gray;
+	}
+	.innerbox4 table{
+		margin: 0 auto !important;
 	}
 	.innerbox3 input[type=submit]{
 		position: relative;
@@ -428,9 +423,10 @@
 	.innerbox5{
 		position: relative;
 		top: -150px;
-		left: 250px;
+		left: 300px;
 		width: 250px;
-		height: 130px;
+		height: 150px;
+		border: 1px solid black;
 	}
 	.search{
 		width: 200px;
@@ -441,6 +437,13 @@
 	.search input[type="text"]{
 		position: relative;
 		width: 150px;
+	}
+	.searchstudent{
+		padding: 5px 10px !important; 
+	}
+	.searchstudent input{
+		display: block;
+		margin: 0 auto;
 	}
 	.regforms{
 		border: 2px solid gray;

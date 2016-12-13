@@ -7,16 +7,19 @@ if(isset($_POST['update'])){
 
 	$id = $_POST['id'];
  	$name = $_POST['name'];
+ 	$cpnum = $_POST['cpnum'];
 	$year = $_POST['yr'];
 
 	$stmt = $db->prepare("UPDATE student SET 
 								name = :name,
-		                 		year = :year 
+		                 		year = :year,
+		                 		cpnum = :cpnum
 		                 		WHERE s_id = :id");
 
 			$stmt->bindValue('name',$name);
 			$stmt->bindValue('year',$year);
 			$stmt->bindValue('id',$id); 
+			$stmt->bindValue('cpnum',$cpnum); 
 
 			$stmt->execute();
 			header('Location:../pages/student.php#popup2');

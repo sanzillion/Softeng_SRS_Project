@@ -120,6 +120,14 @@ function descrow(){
 	return $results;
 }
 
+function disname(){
+	$db = connect();
+	$stmt2 = $db->prepare("SELECT distinct name from student");
+	$stmt2->execute();
+	$data = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+	return $data;
+}
+
 function getsanction(){
 	$db = connect();
 	$sth = $db->prepare("SELECT * From sanction");
@@ -135,6 +143,14 @@ function getsanctionbyname($name){
 	$sth->execute();
 	$results = $sth->fetchAll(PDO::FETCH_OBJ);
 	return $results;
+}
+
+function getsanctionbyid($id){
+	$stmt = $db->prepare("SELECT * from sanction where sanc_id = :id");
+	$stmt->bindValue('id',$id);
+	$stmt->execute();
+	$account = $stmt->fetch(PDO::FETCH_OBJ);
+	return $account;
 }
 
 function sancbyyear($yr){
@@ -218,6 +234,13 @@ function getstudent2($name){ //getemp2
 	$sth = $db->prepare("DELETE FROM sanction");
 	$sth->execute();
 	}
+
+ function deleteone($id){
+ 	$db = connect();
+	$sth = $db->prepare("DELETE FROM sanction Where sanc_id = :id");
+	$sth->bindValue('id',$id);
+	$sth->execute();
+ }
 
  function deleteallmeetings(){
  	$db = connect();

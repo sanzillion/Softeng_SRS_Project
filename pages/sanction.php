@@ -7,19 +7,6 @@ if(!isset($_SESSION['admin'])){
 $admin = $_SESSION['admin'];
 $db = connect();
 
-
-if(isset($_GET['action']) && $_GET['action']=='delete'){
-	$db = connect();
-	$sth = $db->prepare("DELETE FROM sanction Where sanc_id = :id");
-	$sth->bindValue('id',$_GET['id']);
-	$sth->execute();
-	header('Location: sanction.php');
-}
-elseif(isset($_GET['action']) && $_GET['action']=='delete'){
-	deleteallsanction();
-	header('Location: sanction.php');
-}
-
 $getmeet = getmeet();
 $getsanc = getsanction();
 
@@ -40,9 +27,7 @@ for ($i = 0; $i <$arraycount; $i++){
 	$desc[] = implode(',', $getdesc[$i]);
 }
 
-	$stmt2 = $db->prepare("SELECT distinct name from student");
-	$stmt2->execute();
-	$data = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+	$data = disname();
 
 	$option = "";
 	foreach ($data as $row) {
@@ -157,7 +142,7 @@ if($arraycount < 1 || $arraycount == 0){
 				<option>4th</option>
 			</select>
 		</form>
-		<br> <a href="sanction.php?action=deleteall">Delete All</a>
+		<br> <a href="../process/delete.php?action=deleteall">Delete All</a>
 		</div>
 
 			<div class="innerbox4">
@@ -181,10 +166,10 @@ if($arraycount < 1 || $arraycount == 0){
 			<?php if($arraycount >= 6){echo '<td>'.$k->$desc[5].'</td>';} ?>
 			<?php if($arraycount >= 7){echo '<td>'.$k->$desc[6].'</td>';} ?>
 			<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';} ?>
-			<?php }catch(exception $e){echo "DB error";}?>
+			<?php }catch(exception $e){echo $e;}?>
 			<td><a href="../process/pass2.php?id=<?php echo $k->sanc_id;?>">
 			<img src="../img/edit.png">&nbsp</a>
-			<a href="sanction.php?id=<?php echo $k->sanc_id;?>
+			<a href="../process/delete.php?id=<?php echo $k->sanc_id;?>
 			&action=delete" onclick="return confirm('Are you sure?')">
 			<img src="../img/delete.png"></a>
 			</td>
@@ -199,11 +184,8 @@ if($arraycount < 1 || $arraycount == 0){
 		<?php
 		
 		$id = $_SESSION['id'];
-
-		$stmt = $db->prepare("SELECT * from sanction where sanc_id = :id");
-		$stmt->bindValue('id',$id);
-		$stmt->execute();
-		$account = $stmt->fetch(PDO::FETCH_OBJ);
+		$account = getsanctionbyid($id);
+		
 		?>
 	<div class="popup">
 		<?php

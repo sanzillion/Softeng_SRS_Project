@@ -4,45 +4,10 @@ include "../process/functions.php";
 if(!isset($_SESSION['admin'])){
 	header('Location: ../pages/login.php?error2');
 }
-$admin = $_SESSION['admin'];
+
 $db = connect();
-
-if(isset($_POST['sub'])){ //Register Student
-	$fname = $_POST['fname'];
-	$lname = $_POST['lname'];
-	$name = $fname." ".$lname;
-	$yr = $_POST['yr'];
-
-		if(findstudents($name)){
-			header('Location: student.php?error=1');
-		}
-		else{
-		$query = $db->prepare("INSERT INTO student SET 
-			                 		name = ?,
-			                 		year = ?");
-
-		$query->bindParam(1,$name);
-		$query->bindParam(2,$yr);
-
-		$query->execute();
-		}
-	}
-
-if(isset($_GET['action']) && $_GET['action']=='delete'){
-	//delete from student record also delete the student from sanction record
-	$g = getstudentsbyid($_GET['id']);
-	$name = $g->name;
-	deletefromsanc($name);
-	deleteonestudent($_GET['id']);
-	header('Location:student.php');
-}
-elseif(isset($_GET['action']) && $_GET['action']=='deleteall'){
-	//if click deleteALL then delete also all from sanction records
-	deleteall();
-	deleteallsanction();
-}
-
 $array = getstudents(); //select everyone
+$num = 0; // for table color
 
 if(isset($_POST['search'])){ //search by name
 	if(findname($_POST['search'])){
@@ -89,7 +54,7 @@ if(isset($_POST['searchyr'])){ //search by year
 		<div class="contentbox">
 
 		<div class="innerbox1">
-		<form class="regform" method="POST" action="#">
+		<form class="regform" method="POST" action="../process/registerprocess.php">
 		<p>Register Student</p>
 		<?php
 			if(isset($_GET['error'])){
@@ -99,19 +64,16 @@ if(isset($_POST['searchyr'])){ //search by year
 		?>
 		<input type="text" name="fname" placeholder="firstname" required>
 		<input type="text" name="lname" placeholder="lastname" required>
-		<select name="yr" required>
+		<input type="text" name="cpnum" placeholder="cp number | ex: 63907..." required>
+		<label>Year:</label> <select name="yr" required>
 			<option></option>
 			<option>1st</option>
 			<option>2nd</option>
 			<option>3rd</option>
 			<option>4th</option>
 		</select>
-		<input type="submit" name="sub">
+		<input type="submit" name="submitstudent">
 		</form>
-			<p>Search by Name:</p>
-			<form class="searched" method="POST" action="student.php" >
-					<input type="text" name="search" placeholder="Name here">
-			</form>
 			<p>Search by Year:</p>
 			<form class="searchyr" method="POST" action="student.php">
 			<select name="searchyr" onchange="this.form.submit()">
@@ -122,24 +84,40 @@ if(isset($_POST['searchyr'])){ //search by year
 				<option>4th</option>
 			</select>
 			</form>
-			<br><br>
-			<a href="student.php?action=deleteall" onclick="return confirm('Sanction Records Will be deleted too!')">Delete All</a>
+			<br>
+				
+			<a href="../process/deletestudent.php?action=deleteall" onclick="return confirm('Sanction Records Will be deleted too!')">Delete All</a>
 		</div>
 			<div class="innerbox7">
+			<form class="searchstudent" method="POST" action="student.php" >
+					<input type="text" name="search" placeholder="Search student name">
+			</form>
 			<div class="innerbox2">
-				<table class="table1" border="2">
+
+				<table class="table1">
 					<tr>
 						<th>Name</th>
 						<th>Year</th>
+						<th>Mobile No.</th>
 						<th>Option</th>
 					</tr>
 					<?php foreach ($array as $g):?>
-					<tr>
+					<tr <?php 
+						$color = $num % 2;
+						if($color == 1){
+							echo "style=\"background-color: #a7f5b2;\"";
+						}
+						else{
+							echo "style=\"background-color: none;\"";
+						}
+						$num++;					
+						?>>
 						<td><?php echo  $g->name; ?></td>
 						<td><?php echo  $g->year; ?></td>
+						<td><?php echo  $g->cpnum; ?></td>
 						<td><a 	href="../process/pass.php?id=<?php echo $g->s_id;?>">
 						<img src="../img/edit.png">&nbsp</a>
-						<a href="student.php?id=<?php echo $g->s_id;?>
+						<a href="../process/deletestudent.php?id=<?php echo $g->s_id;?>
 						&action=delete" onclick="return confirm('Are you sure?')">
 						<img src="../img/delete.png"></a>
 						</td>
@@ -183,6 +161,11 @@ if(isset($_POST['searchyr'])){ //search by year
 				<td><label>Name:</label></td>
 				<td><input type="text" name="name" required
 				value="<?php echo $account->name?>"</td>
+			</tr>
+			<tr>
+				<td><label>Mobile No.:</label></td>
+				<td><input type="text" name="cpnum" required
+				value="<?php echo $account->cpnum?>"</td>
 			</tr>
 			<tr>
 				<td><label>Year:</label></td>
