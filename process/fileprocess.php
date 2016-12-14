@@ -38,21 +38,26 @@ if(isset($_POST['sub'])){
 
 if(isset($_POST['submit'])){
 	if(is_uploaded_file($_FILES['userfile']['tmp_name']) && 
-		is_uploaded_file($_FILES['yrs']['tmp_name'])){
+		is_uploaded_file($_FILES['yrs']['tmp_name']) &&
+		is_uploaded_file($_FILES['cpnum']['tmp_name'])){
 		if($_FILES['userfile']['type'] != "text/plain" && 
-			$_FILES['yrs']['type'] != "text/plain"){
+			$_FILES['yrs']['type'] != "text/plain" &&
+			$_FILES['cpnum']['type'] != "text/plain" ){
 			echo "Invalid Filetype";
 		}
 		elseif($_FILES['userfile']['size'] > 5000 &&
-			$_FILES['yrs']['size'] > 5000){
+			$_FILES['yrs']['size'] > 5000 &&
+			$_FILES['cpnum']['size'] > 5000){
 			echo "File too large";
 		}
 		elseif($_FILES['userfile']['size'] < 50 &&
-			$_FILES['yrs']['size'] < 50){
+			$_FILES['yrs']['size'] < 50 &&
+			$_FILES['cpnum']['size'] < 50){
 			echo "File too small";
 		}
 		elseif($_FILES['userfile']['error'] > 0 &&
-			$_FILES['yrs']['error'] > 0){
+			$_FILES['yrs']['error'] > 0 &&
+			$_FILES['cpnum']['error'] > 0){
 			echo "Invalid File/ No file";
 		}
 		else{
@@ -61,24 +66,31 @@ if(isset($_POST['submit'])){
 
 			$string = file_get_contents($_FILES['userfile']['tmp_name'], "r");
 			$string2 = file_get_contents($_FILES['yrs']['tmp_name'], "r");
+			$string3 = file_get_contents($_FILES['cpnum']['tmp_name'], "r");
 			$names = explode("\n", $string);
 			$yrs = explode("\n", $string2);
+			$cpnum = explode("\n", $string3);
 
 			$arraycount = count($names);
 			$arraycount2 = count($yrs);
-			if($arraycount == $arraycount2){
+			$arraycount3 = count($cpnum);
+			if($arraycount == $arraycount2 && 
+				$arraycount == $arraycount3){
 
 				$arraycount -=1;
 
 				for($i = 0; $i < $arraycount; $i++){
 				// echo $names[$i].'<br>';
 		    	$query = $db->prepare("INSERT INTO test SET 
-								name = ?, yrs = ?");
+								name = ?, yrs = ?, cpnum = ?");
 				$query->bindParam(1,$names[$i]);
 				$query->bindParam(2,$yrs[$i]);
+				$query->bindParam(3,$cpnum[$i]);
 				$query->execute();
-
 				}
+			}
+			else{
+				echo "Data are inconsistent!";
 			}
 			
 

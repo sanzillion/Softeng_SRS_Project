@@ -11,6 +11,7 @@ I am Sanz, currently in my 3rd year as an IT student.
 - I can create a Web Server at home
 - And try to host my site remotely
 - wanting to learn PHP framework: Laravel
+
 There is not much to learn at school, they teach us
 heavily on stuffs like theories and models of software 
 development, also the documentation and management part

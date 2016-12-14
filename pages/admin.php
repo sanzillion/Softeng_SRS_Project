@@ -50,7 +50,8 @@ $db = connect();
 				method="POST">
 				    <p>Txt Files Upload</p>
 				    <input name="userfile" type="file" placeholder="Names" required>
-				    <input type="file" name="Year" placeholder="Names" required> 
+				    <input type="file" name="Year" placeholder="Names" required>
+				    <input type="file" name="cpnum" placeholder="Mobile" required>
 				    <input type="submit" value="Send File" name="submit" >
 				</form>
 
