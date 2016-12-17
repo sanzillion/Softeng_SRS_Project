@@ -149,18 +149,18 @@ if($arraycount >= 1){ $r1 = $_POST["$meet1"];	}
 	$id = $_POST['id'];
 
 	if($arraycount == 1){
-		$stmt = $db->prepare("UPDATE sanction $meet1 = :m1 WHERE sanc_id = :id");
+		$stmt = $db->prepare("UPDATE sanction SET $meet1 = :m1 WHERE sanc_id = :id");
 	    $stmt->bindParam(':m1', $r1);
 	    $stmt->bindParam(':id', $id);
 	}	
 	elseif($arraycount == 2){
-		$stmt = $db->prepare("UPDATE sanction $meet1 = :m1, $meet2 = :m2 WHERE sanc_id = :id");
+		$stmt = $db->prepare("UPDATE sanction SET $meet1 = :m1, $meet2 = :m2 WHERE sanc_id = :id");
 	    $stmt->bindParam(':m1', $r1);
 	    $stmt->bindParam(':m2', $r2);
 	    $stmt->bindParam(':id', $id);
 	}	
 	elseif($arraycount == 3){
-		$stmt = $db->prepare("UPDATE sanction $meet1 = :m1, $meet2 = :m2, $meet3 = :m3 WHERE sanc_id = :id");
+		$stmt = $db->prepare("UPDATE sanction SET $meet1 = :m1, $meet2 = :m2, $meet3 = :m3 WHERE sanc_id = :id");
 	    $stmt->bindParam(':m1', $r1);
 	    $stmt->bindParam(':m2', $r2);
 	    $stmt->bindParam(':m3', $r3);
