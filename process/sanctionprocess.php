@@ -147,7 +147,6 @@ if($arraycount >= 1){ $r1 = $_POST["$meet1"];	}
 	if($arraycount >= 7){ $r7 = $_POST["$meet7"];	}
 	if($arraycount >= 8){ $r8 = $_POST["$meet8"];	}
 	$id = $_POST['id'];
-echo '<br>'.$r1.' '.$r2.' '.$r3;
 
 	if($arraycount == 1){
 		$stmt = $db->prepare("UPDATE sanction $meet1 = :m1 WHERE sanc_id = :id");
@@ -209,7 +208,7 @@ echo '<br>'.$r1.' '.$r2.' '.$r3;
 	    $stmt->bindParam(':id', $id);
 	}
 	elseif($arraycount == 8){
-		$stmt = $db->prepare("UPDATE sanction $meet1 = :m1, $meet2 = :m2, $meet3 = :m3, 
+		$stmt = $db->prepare("UPDATE sanction SET $meet1 = :m1, $meet2 = :m2, $meet3 = :m3, 
 							$meet4 = :m4, $meet5 = :m5, $meet6 = :m6, $meet7 = :m7, $meet8 = :m8 WHERE sanc_id = :id");
 	    $stmt->bindParam(':m1', $r1);
 	    $stmt->bindParam(':m2', $r2);
@@ -221,16 +220,16 @@ echo '<br>'.$r1.' '.$r2.' '.$r3;
 	    $stmt->bindParam(':m8', $r8);
 	    $stmt->bindParam(':id', $id);
 	}
-
-	if($stmt->execute())
-	{
+	
+	if($stmt->execute()){
 		echo "Query executed!";
+		header('Location: ../pages/sanction.php#popup2');
 	}
 	else{
 		echo "db error";
+		header('Location: ../pages/sanction.php#popup4');
 	}
-
-	header('Location: ../pages/sanction.php#popup2');
+	
 }
 
 ?>

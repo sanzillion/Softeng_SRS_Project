@@ -277,5 +277,14 @@ if($arraycount < 1 || $arraycount == 0){
 	</div>
 	</div>
 
+	<div id="popup4" class="overlay">
+	<div class="popup">
+		<a class="close" href="#">&times;</a>
+		<div class="content3">
+			<h2>Db error!</h2>
+		</div>
+	</div>
+	</div>
+
 </body>
 </html>

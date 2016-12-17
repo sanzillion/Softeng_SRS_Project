@@ -49,5 +49,8 @@ if(isset($_POST['submit'])){
 		header("Location:../pages/login.php?error1");
 	}
 }
+else{
+	header("Location:../pages/login.php?error1");
+}
 
 ?>
