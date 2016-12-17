@@ -127,10 +127,6 @@ if($arraycount < 1 || $arraycount == 0){
 		</div>
 
 		<div class="innerbox5">
-		<form class="search" method="POST" action="sanction.php">
-			<label>Search by name</label>
-			<br><input type="text" name="search" placeholder="search">
-		</form>
 		<br>
 		<form class="searches" method="POST" action="sanction.php">
 			<label>Search by year</label>
@@ -145,37 +141,43 @@ if($arraycount < 1 || $arraycount == 0){
 		<br> <a href="../process/delete.php?action=deleteall">Delete All</a>
 		</div>
 
-			<div class="innerbox4">
+		<div class="innerbox4">
+			<form class="search" method="POST" action="sanction.php">
+				<label>Search by name</label>
+				<br><input type="text" name="search" placeholder="search">
+			</form>
+			<div class="innerbox9">
 				<table class="table1" border="1">
-		<tr>
-			<th>Student</th>
-			<?php foreach ($getmeet as $g):?>
-			<th><?php echo $g->description; ?></th>
-			<?php endforeach;?>
-			<th>Option</th>
-		</tr>
-		<?php foreach ($getsanc as $k):?>
-		<tr>
-			<td><?php echo $k->s_name ?></td>
-			<?php try{ ?>
-			<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';} ?>
-			<?php if($arraycount >= 2){echo '<td>'.$k->$desc[1].'</td>';} ?>
-			<?php if($arraycount >= 3){echo '<td>'.$k->$desc[2].'</td>';} ?>
-			<?php if($arraycount >= 4){echo '<td>'.$k->$desc[3].'</td>';} ?>
-			<?php if($arraycount >= 5){echo '<td>'.$k->$desc[4].'</td>';} ?>
-			<?php if($arraycount >= 6){echo '<td>'.$k->$desc[5].'</td>';} ?>
-			<?php if($arraycount >= 7){echo '<td>'.$k->$desc[6].'</td>';} ?>
-			<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';} ?>
-			<?php }catch(exception $e){echo $e;}?>
-			<td><a href="../process/pass2.php?id=<?php echo $k->sanc_id;?>">
-			<img src="../img/edit.png">&nbsp</a>
-			<a href="../process/delete.php?id=<?php echo $k->sanc_id;?>
-			&action=delete" onclick="return confirm('Are you sure?')">
-			<img src="../img/delete.png"></a>
-			</td>
-		</tr>
-		<?php endforeach;?>
-		</table>
+				<tr>
+					<th>Student</th>
+					<?php foreach ($getmeet as $g):?>
+					<th><?php echo $g->description; ?></th>
+					<?php endforeach;?>
+					<th>Option</th>
+				</tr>
+				<?php foreach ($getsanc as $k):?>
+				<tr>
+					<td><?php echo $k->s_name ?></td>
+					<?php try{ ?>
+					<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';} ?>
+					<?php if($arraycount >= 2){echo '<td>'.$k->$desc[1].'</td>';} ?>
+					<?php if($arraycount >= 3){echo '<td>'.$k->$desc[2].'</td>';} ?>
+					<?php if($arraycount >= 4){echo '<td>'.$k->$desc[3].'</td>';} ?>
+					<?php if($arraycount >= 5){echo '<td>'.$k->$desc[4].'</td>';} ?>
+					<?php if($arraycount >= 6){echo '<td>'.$k->$desc[5].'</td>';} ?>
+					<?php if($arraycount >= 7){echo '<td>'.$k->$desc[6].'</td>';} ?>
+					<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';} ?>
+					<?php }catch(exception $e){echo $e;}?>
+					<td><a href="../process/pass2.php?id=<?php echo $k->sanc_id;?>">
+					<img src="../img/edit.png">&nbsp</a>
+					<a href="../process/delete.php?id=<?php echo $k->sanc_id;?>
+					&action=delete" onclick="return confirm('Are you sure?')">
+					<img src="../img/delete.png"></a>
+					</td>
+				</tr>
+				<?php endforeach;?>
+				</table>
+			</div>
 			</div>	
 		</div>
 	</div>

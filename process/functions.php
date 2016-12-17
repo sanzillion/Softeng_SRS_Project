@@ -146,6 +146,7 @@ function getsanctionbyname($name){
 }
 
 function getsanctionbyid($id){
+	$db = connect();
 	$stmt = $db->prepare("SELECT * from sanction where sanc_id = :id");
 	$stmt->bindValue('id',$id);
 	$stmt->execute();
