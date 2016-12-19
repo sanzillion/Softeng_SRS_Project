@@ -46,16 +46,32 @@ $db = connect();
 			</div>	
 
 			<div class="innerbox8">
-				<form class="uptxt" enctype="multipart/form-data" action="../process/filprocess.php" 
+			<form class="uptxt" enctype="multipart/form-data" action="../process/fileprocess.php" 
 				method="POST">
-				    <p>Txt Files Upload</p>
-				    <input name="userfile" type="file" placeholder="Names" required>
-				    <input type="file" name="Year" placeholder="Names" required>
-				    <input type="file" name="cpnum" placeholder="Mobile" required>
-				    <input type="submit" value="Send File" name="submit" >
-				</form>
+			<table>
+				<tr>
+					<th colspan="2">Txt Files Upload</th>
+				</tr>
+				<tr>
+					<td><label>Name:</label></td>
+					<td><input name="userfile" type="file" placeholder="Names" required></td>
+				</tr>
+				<tr>
+					<td><label>Year:</label></td>
+					<td><input type="file" name="yrs" placeholder="Year" required></td>
+				</tr>
+				<tr>
+					<td><label>CPnum:</label></td>
+					<td><input type="file" name="cpnum" placeholder="Mobile" required></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Send File" name="submit" ></td>
+				</tr>
+			</table>				    
+			</form>
 
-				<form class="upcsv" enctype="multipart/form-data" action="../process/filprocess.php" 
+				<form class="upcsv" enctype="multipart/form-data" action="../process/fileprocess.php" 
 				method="POST">
 				    <p>CSV File Upload</p>
 				    <input name="csv" type="file" placeholder="" value="Names" required>
