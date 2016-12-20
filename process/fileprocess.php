@@ -5,36 +5,42 @@ include "functions.php";
 $db = connect();
 
 if(isset($_POST['sub'])){
-	// try{
-		$uploaddir = '../uploads/';
-		$uploadfile = $uploaddir . basename($_FILES['csv']['name']);
-		echo $uploadfile.'<br>';
-		if(move_uploaded_file($_FILES['csv']['tmp_name'],$uploadfile)){
-			echo "good!<br>";
+	if(is_uploaded_file($_FILES['csv']['tmp_name'])){
+			if($_FILES['csv']['type'] == "application/vnd.ms-excel"){
+			$uploaddir = '../uploads/';
+			$uploadfile = $uploaddir . basename($_FILES['csv']['name']);
+			echo $uploadfile.'<br>';
+			if(move_uploaded_file($_FILES['csv']['tmp_name'],$uploadfile)){
+				echo "good!<br>";
+			}
+			else{
+				echo "not good!<br>";
+			}
+									
+			$name = $_FILES['csv']['name'];
+			$query = $db->prepare("LOAD DATA LOCAL INFILE '$uploadfile' INTO TABLE `student` FIELDS 
+			TERMINATED BY ',' LINES TERMINATED BY '\n' (`name` , `yr`, `cpnum`)");
+
+			if($query->execute()){
+				echo 'successfully uploaded <br>';
+				$query->closeCursor();
+				header('Location: ../pages/admin.php');
+			}
+			else{
+				echo 'failed! <br>';
+				$query->closeCursor();
+				$_SESSION['QUE_ERROR'] += 1;
+				header('Location: ../pages/admin.php?error=dberror');
+			}
 		}
 		else{
-			echo "not good!<br>";
+			echo "file type invalid";
 		}
-								//SOLVE THIS LOAD DATA INFILE (WITHOUT LOCAL FOR SECURITY)
-		$name = $_FILES['csv']['name'];
-		$query = $db->prepare("LOAD DATA LOCAL INFILE '$uploadfile' INTO TABLE `student` FIELDS 
-		TERMINATED BY ',' LINES TERMINATED BY '\n' (`name` , `year`, `cpnum`)");
-	//	$query->execute();
-		if($query->execute()){
-			echo 'successfully uploaded <br>';
-			$query->closeCursor();
-			//header('Location: ../pages/admin.php?error=none');
-		}
-		else{
-			echo 'failed! <br>';
-			$query->closeCursor();
-			//header('Location: ../pages/admin.php?error=none');
-		}
-	// }
-	// catch(Exception $e){
-	// 	echo $e;
-	// }
-	
+		
+	}
+	else{
+		echo "no file uploaded";
+	}
 	
 }
 
@@ -108,4 +114,5 @@ else{
 	//header('Location: ../pages/admin.php?error=nofiles');
 }	
 
+echo $_SESSION['QUE_ERROR'];
  ?>

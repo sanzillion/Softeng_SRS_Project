@@ -329,26 +329,50 @@
 		position: relative;
 		left: 170px;
 		top: -395px;
-		width: 500px;
+		width: 700px;
 		height: 370px;
 		overflow: auto;
 		padding-top: 5px;
 	}
-	.uptxt{
+	.innerbox8 form{
+		float: left;
+		margin-left: 10px;
+	}
+	.upcsv{
+		position: inline;
 		border: solid 2px #f55465;
 		margin-top: 10px;
 		padding: 10px 0px;
 		padding-left: 10px;
-		width: 300px;
+		width: 320px;
+		height: 130px;
 	}
 	.uptxt label{
-		font-size: 12px;
+		font-size: 14px;
 	}
-	.upcsv{
+	.upcsv label{
+		font-size: 14px;
+	}
+	.upcsv table{
+		height: 120px;
+	}
+	.upcsv table tr{
+		padding-top: 10px;
+	}
+	.upcsv table tr input[type="submit"]{
+		margin-left: 100px;
+	}
+	.innerbox8 table tr input[type="file"]{
+		border: solid 1px #D5DBDB;
+		border-radius: 2px;
+	}
+	.uptxt{
+		position: inline;
 		margin-top: 10px;
 		padding-left: 10px !important;
 		padding: 10px 0px;
 		border: solid 2px #f55465;
+		width: 320px;
 	}
 	.innerbox7 form p{
 		margin: 0px 0px;

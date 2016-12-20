@@ -7,6 +7,18 @@ if(!isset($_SESSION['admin'])){
 
 $admin = $_SESSION['admin'];
 $db = connect();
+$dis = "disabled";
+$color = "color: gray; backgroun-color: gray; border: 2px solid gray;";
+if(isset($_SESSION['QUE_ERROR'])){
+		if($_SESSION['QUE_ERROR'] > 3){
+		$dis = " ";
+		$color = " ";
+	}
+	else{
+		$dis = "disabled";
+	}
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -46,36 +58,50 @@ $db = connect();
 			</div>	
 
 			<div class="innerbox8">
-			<form class="uptxt" enctype="multipart/form-data" action="../process/fileprocess.php" 
+			<form class="upcsv" enctype="multipart/form-data" action="../process/fileprocess.php" 
 				method="POST">
-			<table>
-				<tr>
-					<th colspan="2">Txt Files Upload</th>
-				</tr>
-				<tr>
-					<td><label>Name:</label></td>
-					<td><input name="userfile" type="file" placeholder="Names" required></td>
-				</tr>
-				<tr>
-					<td><label>Year:</label></td>
-					<td><input type="file" name="yrs" placeholder="Year" required></td>
-				</tr>
-				<tr>
-					<td><label>CPnum:</label></td>
-					<td><input type="file" name="cpnum" placeholder="Mobile" required></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" value="Send File" name="submit" ></td>
-				</tr>
-			</table>				    
+				<table>
+					<tr>
+						<th colspan="2">CSV File Upload</th>
+					</tr>
+					<tr>
+						<td><label>CSV file :</label></td>
+						<td><input name="csv" type="file" placeholder="asdfasdf" value="Names" required></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Submit File" name="sub" >	    </td>
+					</tr>
+				</table>
 			</form>
 
-				<form class="upcsv" enctype="multipart/form-data" action="../process/fileprocess.php" 
-				method="POST">
-				    <p>CSV File Upload</p>
-				    <input name="csv" type="file" placeholder="" value="Names" required>
-				    <input type="submit" value="Send File" name="sub" >
+				<form class="uptxt" enctype="multipart/form-data" action="../process/fileprocess.php" 
+				method="POST" <?php echo $dis; ?> style="<?php echo $color; ?>">
+					<table>
+						<tr>
+							<th colspan="2">Txt Files Upload</th>
+						</tr>
+						<tr>
+							<td><label>Name:</label></td>
+							<td><input name="userfile" type="file" 
+							placeholder="Names" required <?php echo $dis; ?>></td>
+						</tr>
+						<tr>
+							<td><label>Year:</label></td>
+							<td><input type="file" name="yrs" placeholder="Year" 
+							required <?php echo $dis; ?>></td>
+						</tr>
+						<tr>
+							<td><label>CPnum:</label></td>
+							<td><input type="file" name="cpnum" placeholder="Mobile" 
+							required <?php echo $dis; ?>></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" value="Submit File" name="submit" 
+							<?php echo $dis; ?>></td>
+						</tr>
+					</table>
 				</form>
 			</div>
 		</div>
@@ -182,17 +208,21 @@ $db = connect();
 			can have his/her password change.<br>
 			<h5>Login Records</h5> - these records are the datetime records of admin
 			log-ins for auditing.<br>
-			<h5>TXT uploads</h5> - this feature serves as a quick registration function
-			through .txt files with students names and yr, it has a limit in file size and 
-			it only accepts specific file type. <a href="">See here</a> for a copy of .txt format
-			that the system can read. For more inquiries, pls contact System Support<br>
-			<h5>CSV uploads</h5> - this feature is also for quick registration, it is faster and more
+			<h5>CSV uploads</h5> - this feature is for quick registration, it is faster and more
 			efficient than .txt uploads. CSV stands for comma-separated-values. This format is
 			available on save-as function of an excel file. An excel file with 2 columns and multiple
 			rows will be extracted into the .csv file, which like a txt file, but fields are separated
 			by commas and rows and terminated by nextLine which will be read by LOAD DATA LOCAL INFILE 
-			query and registers the content into database. <a href="">See here</a> for a copy of .csv 
-			format. Contact system support for bugs and errors </h4>
+			query and registers the content into database. Note: Though this is the most effecient 
+			process in registering bulk student information in the system, this also is a loose method,
+			it is therefore highly recommended to put the proper values without	unnecessary characters 
+			in the excel columns. <a href="">See here</a> for a copy of .csv format. 
+			Contact system support for bugs and errors.
+			<h5>TXT uploads</h5> - this feature also serves as a quick registration function
+			through .txt files with students names and yr, it has a limit in file size and 
+			it only accepts specific file type. <a href="">See here</a> for a copy of .txt format
+			that the system can read. However, it will only be activated for use if there is
+			an error in reading csv format. For more inquiries, pls contact System Support<br></h4>
 		</div>
 	</div>
 	</div>
