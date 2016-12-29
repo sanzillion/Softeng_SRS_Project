@@ -6,7 +6,9 @@ $db = connect();
 
 if(isset($_POST['sub'])){
 	if(is_uploaded_file($_FILES['csv']['tmp_name'])){
-			if($_FILES['csv']['type'] == "application/vnd.ms-excel"){
+			echo $_FILES['csv']['type'];
+			if($_FILES['csv']['type'] == "application/vnd.ms-excel"
+				|| $_FILES['csv']['type'] == "application/octet-streamfile"){
 			$uploaddir = '../uploads/';
 			$uploadfile = $uploaddir . basename($_FILES['csv']['name']);
 			echo $uploadfile.'<br>';
@@ -19,7 +21,7 @@ if(isset($_POST['sub'])){
 									
 			$name = $_FILES['csv']['name'];
 			$query = $db->prepare("LOAD DATA LOCAL INFILE '$uploadfile' INTO TABLE `student` FIELDS 
-			TERMINATED BY ',' LINES TERMINATED BY '\n' (`name` , `yr`, `cpnum`)");
+			TERMINATED BY ',' LINES TERMINATED BY '\n' (`name` , `year`, `cpnum`)");
 
 			if($query->execute()){
 				echo 'successfully uploaded <br>';
@@ -114,5 +116,4 @@ else{
 	//header('Location: ../pages/admin.php?error=nofiles');
 }	
 
-echo $_SESSION['QUE_ERROR'];
  ?>
