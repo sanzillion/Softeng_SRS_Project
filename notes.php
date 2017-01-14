@@ -34,7 +34,7 @@ BOOTSTRAP CLASS (Cheat Sheet):
 
 JQuery (Cheat Sheet)
 $(document).ready(function() { //syntax
-  $("element by id or class or tag").function("properties or changes")
+  $("element by id or class or tag").function("properties or changes");
   $("#target1").css("color", "red");
   $("#target1").prop("disabled", true);
   $("#target4").remove();
@@ -46,5 +46,24 @@ $(document).ready(function() { //syntax
   $(".target:nth-child(2)").addClass("animated bounce"); // nth-child(1) funtcton
   $(".target:even").addClass("animated shake");
   $("body").addClass("animated hinge");
-})
+});
 </script>
+
+brother
+
+You are both special in every way,
+Encouraging me more and more each passing day.
+
+You both are the reason why I'm so strong,
+With you two at the helm not a thing could go wrong.
+
+You've both helped me through many trials and tribulations,
+You've made things better in every situation.
+
+Thank you both for always being there,
+And showing me that you truly care.
+
+Words could never explain how I feel about you,
+But I hope you know that I truly love you two!
+
+Source: http://www.familyfriendpoems.com/poem/ode-to-loving-parents
