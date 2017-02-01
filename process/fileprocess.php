@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 session_start();
 include "functions.php";
@@ -18,9 +18,9 @@ if(isset($_POST['sub'])){
 			else{
 				echo "not good!<br>";
 			}
-									
+
 			$name = $_FILES['csv']['name'];
-			$query = $db->prepare("LOAD DATA LOCAL INFILE '$uploadfile' INTO TABLE `student` FIELDS 
+			$query = $db->prepare("LOAD DATA LOCAL INFILE '$uploadfile' INTO TABLE `student` FIELDS
 			TERMINATED BY ',' LINES TERMINATED BY '\n' (`name` , `year`, `cpnum`)");
 
 			if($query->execute()){
@@ -38,19 +38,19 @@ if(isset($_POST['sub'])){
 		else{
 			echo "file type invalid";
 		}
-		
+
 	}
 	else{
 		echo "no file uploaded";
 	}
-	
+
 }
 
 if(isset($_POST['submit'])){
-	if(is_uploaded_file($_FILES['userfile']['tmp_name']) && 
+	if(is_uploaded_file($_FILES['userfile']['tmp_name']) &&
 		is_uploaded_file($_FILES['yrs']['tmp_name']) &&
 		is_uploaded_file($_FILES['cpnum']['tmp_name'])){
-		if($_FILES['userfile']['type'] != "text/plain" && 
+		if($_FILES['userfile']['type'] != "text/plain" &&
 			$_FILES['yrs']['type'] != "text/plain" &&
 			$_FILES['cpnum']['type'] != "text/plain" ){
 			echo "Invalid Filetype";
@@ -71,7 +71,7 @@ if(isset($_POST['submit'])){
 			echo "Invalid File/ No file";
 		}
 		else{
-			
+
 			$name = $_FILES['userfile']['name'].'<br>';
 
 			$string = file_get_contents($_FILES['userfile']['tmp_name'], "r");
@@ -84,14 +84,14 @@ if(isset($_POST['submit'])){
 			echo $arraycount = count($names);
 			echo $arraycount2 = count($yrs);
 			echo $arraycount3 = count($cpnum);
-			if($arraycount == $arraycount2 && 
-				$arraycount == $arraycount3 && 
+			if($arraycount == $arraycount2 &&
+				$arraycount == $arraycount3 &&
 				$arraycount2 == $arraycount3){
 
 				for($i = 0; $i < $arraycount; $i++){
 				echo '<br>'.$i." - ".$yrs[$i];
 				$yrs[$i] = substr($yrs[$i],0,3);
-		    	$query = $db->prepare("INSERT INTO student SET 
+		    	$query = $db->prepare("INSERT INTO student SET
 								name = ?, year = ?, cpnum = ?");
 				$query->bindParam(1,$names[$i]);
 				$query->bindParam(2,$yrs[$i]);
@@ -114,6 +114,6 @@ if(isset($_POST['submit'])){
 }
 else{
 	//header('Location: ../pages/admin.php?error=nofiles');
-}	
+}
 
  ?>

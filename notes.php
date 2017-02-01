@@ -27,7 +27,7 @@ BOOTSTRAP CLASS (Cheat Sheet):
  col-xs-4 (column-extra small-column span 4)
  col-md-* (Medium for laptop)
  well
-
+ 
 </style>
 
 <script type="text/javascript">

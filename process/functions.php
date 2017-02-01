@@ -2,8 +2,8 @@
  function connect(){
  	$db = new PDO("mysql:host=localhost;dbname=sad","root","", array(
  		PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8",
- 		PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => TRUE, 
- 		//PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, 
+ 		PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => TRUE,
+ 		//PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
  		PDO::MYSQL_ATTR_LOCAL_INFILE => TRUE,
  		PDO::MYSQL_ATTR_USE_BUFFERED_QUERY));
  	return $db;
@@ -158,7 +158,7 @@ function sancbyyear($yr){
 	$db = connect();
 	$sth = $db->prepare("SELECT *
 						FROM sanction
-						INNER JOIN student 
+						INNER JOIN student
 						ON sanction.s_name = student.name
 						WHERE student.year = ?");
 
@@ -196,7 +196,7 @@ function getstudent2($name){ //getemp2
 	$names.= $name;
 	$names.= '%';
 	$db = connect();
-	$query = $db->prepare("SELECT * From student 
+	$query = $db->prepare("SELECT * From student
 		WHERE name LIKE ? ");
 	$query->bindParam(1,$names);
 	$query->execute();
@@ -210,7 +210,7 @@ function getstudent2($name){ //getemp2
  	$names.= $name;
  	$names.= '%';
  	$db = connect();
-	$query = $db->prepare("SELECT * From student 
+	$query = $db->prepare("SELECT * From student
 		WHERE name LIKE ? ");
 	$query->bindParam(1,$names);
 
