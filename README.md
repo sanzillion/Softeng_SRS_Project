@@ -3,13 +3,13 @@ I am Sanz, currently in my 3rd year as an IT student.
 - i love programming in JAVA
 - almost a year coding in PHP (still a novice)
 - recently introduced myself in git
-- trying to learn javascript and jquery
+- trying to learn javascript and jquery (CHECK: Tried)
 - trying to casually learn API/REST
-- wanting to learn bootstrap
-- wanting to familiarize PYTHON
-- Learning the Linux environment so that
-- I can create a Web Server at home
-- And try to host my site remotely
+- wanting to learn bootstrap (CHECK: Learned)
+- wanting to familiarize PYTHON (CHECK: Learning)
+- Learning the Linux environment so that (CHECK)
+- I can create a Web Server at home (CHECK: Done)
+- And try to host my site remotely (CHECK: Done)
 - wanting to learn PHP framework: Laravel
 
 There is not much to learn at school, they teach us
